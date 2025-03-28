@@ -1,0 +1,19 @@
+name: bot-detector
+channels:
+  - defaults
+dependencies:
+  - python
+  - notebook
+  - jupyterlab
+  - numpy
+  - pandas
+  - scipy
+  - scikit-learn
+  - nltk
+  - gensim
+  - tqdm
+  - matplotlib
+  - seaborn
+  - pip
+  - pip:
+    - torch
