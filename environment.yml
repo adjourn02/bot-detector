@@ -7,7 +7,7 @@ dependencies:
   - jupyterlab
   - numpy
   - pandas
-  - scipy
+  - scipy<1.13
   - scikit-learn
   - nltk
   - gensim
@@ -17,4 +17,6 @@ dependencies:
   - pip
   - pip:
     - torch
+    - torchvision
     - emoji
+    - transformers
