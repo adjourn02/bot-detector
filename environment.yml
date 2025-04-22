@@ -20,3 +20,4 @@ dependencies:
     - torchvision
     - emoji
     - transformers
+    - wordcloud
