@@ -48,10 +48,10 @@ To run an implementation above, select the respective notebook under "Improved_I
 ## Embedding Visualization
 We used t-SNE to visualize the resulting Embedding when applying either GloVE or RoBERTa, in conjunction with the BiLSTM layer, on the Twibot dataset. The plots are shown below:
 
-<img src="Images/tsne_glove.png" width="480" />
-<img src="Images/tsne_roberta.png" width="480" />
-<img src="Images/tsne_glove_lstm_tweet_meta.png" width="480" />
-<img src="Images/tsne_roberta_lstm_tweet_meta.png" width="480" />
+<img src="Images/tsne_glove.png" width="450" />
+<img src="Images/tsne_roberta.png" width="450" />
+<img src="Images/tsne_glove_lstm_tweet_meta.png" width="450" />
+<img src="Images/tsne_roberta_lstm_tweet_meta.png" width="450" />
 
 From the results above, transforming tweet data to GloVE and RoBERTa embeddings result to different t-SNE outputs. However, when this data is fed to the BiLSTM, then concatenated with the metadata, the resulting t-SNE outputs are similar. This suggests that the metadata is more than likely providing meaningful features compared to tweet data. 
 
