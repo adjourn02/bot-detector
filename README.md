@@ -25,7 +25,7 @@ Based on “Deep Neural Networks for Bot Detection” paper by Kudugunta et al. 
 Run all the cells in either notebooks (with or without auxiliary output) under "Baseline_Implementation" to get the performance metrics for the Twibot20 dataset.
 
 ## Improved Implementation
-Our team ran the following experiments to improve the baseline implementation:
+Our team ran the following experiments on the Twibot20 dataset to improve the baseline implementation:
 1. BiLSTM without Auxiliary Output and 200D Glove Embeddings
 2. BiLSTM with Auxiliary Output and 200D Glove Embeddings
 3. BiLSTM without Auxiliary Output and 200D Roberta Embeddings
@@ -42,6 +42,20 @@ To run an implementation above, select the respective notebook under "Improved_I
 | BiLSTM                            | Yes                   | Glove (200D)     | 0.8180   | 0.8384 | 0.6459 |
 | DenseNet                          | No                    | Roberta (200D)   | 0.7650   | 0.7575 | 0.5554 |
 | BiLSTM                            | No                    | Roberta (200D)   | 0.8075   | 0.8039 | 0.6306 |
-| BiLSTM + DenseNet                 | No                    | Glove (200D)     | 0.6228   | 0.6171 | 0.2459 |
+| BiLSTM + DenseNet                 | No                    | Glove (200D)     | 0.8378   | 0.8335 | 0.7034 |
 | Encoder-only Transformer + BiLSTM | No                    | Glove (200D)     | 0.8073   | 0.8118 | 0.6145 |
 
+## Embedding Visualization
+We used t-SNE to visualize the resulting Embedding when applying either GloVE or RoBERTa, in conjunction with the BiLSTM layer, on the Twibot dataset. The plots are shown below:
+
+<img src="Images/tsne_glove.png" width="480" />
+<img src="Images/tsne_roberta.png" width="480" />
+<img src="Images/tsne_glove_lstm_tweet_meta.png" width="480" />
+<img src="Images/tsne_roberta_lstm_tweet_meta.png" width="480" />
+
+From the results above, transforming tweet data to GloVE and RoBERTa embeddings result to different t-SNE outputs. However, when this data is fed to the BiLSTM, then concatenated with the metadata, the resulting t-SNE outputs are similar. This suggests that the metadata is more than likely providing meaningful features compared to tweet data. 
+
+## Bot Detector Using our Best Model on 2024 US Elections Data
+
+
+ 
