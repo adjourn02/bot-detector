@@ -35,13 +35,13 @@ Our team ran the following experiments to improve the baseline implementation:
 
 To run an implementation above, select the respective notebook under "Improved_Implementation" and run all cells just before grid search. The performance of these implementations are tabulated below:
 
-| Implementation       | With Auxiliary Output | Embedding        | Accuracy | F1     | MCC    |
-|----------------------|-----------------------|------------------|----------|--------|--------|
-| LSTM (baseline)      | Yes                   | Glove (200D)     | 0.8295   | 0.8403 | 0.6598 |
-| BiLSTM               | No                    | Glove (200D)     | 0.8235   | 0.8418 | 0.6548 |
-| BiLSTM               | Yes                   | Glove (200D)     | 0.8180   | 0.8384 | 0.6459 |
-| DenseNet             | No                    | Roberta (200D)   | 0.7650   | 0.7575 | 0.5554 |
-| BiLSTM               | No                    | Roberta (200D)   | 0.8044   | 0.8017 | 0.6198 |
-| BiLSTM + DenseNet    | No                    | Glove (200D)     | 0.6228   | 0.6171 | 0.2459 |
-| Transformer + BiLSTM | No                    | Glove (200D)     | 0.8073   | 0.8118 | 0.6145 |
+| Implementation                    | With Auxiliary Output | Embedding        | Accuracy | F1     | MCC    |
+|-----------------------------------|-----------------------|------------------|----------|--------|--------|
+| LSTM (baseline)                   | Yes                   | Glove (200D)     | 0.8295   | 0.8403 | 0.6598 |
+| BiLSTM                            | No                    | Glove (200D)     | 0.8235   | 0.8418 | 0.6548 |
+| BiLSTM                            | Yes                   | Glove (200D)     | 0.8180   | 0.8384 | 0.6459 |
+| DenseNet                          | No                    | Roberta (200D)   | 0.7650   | 0.7575 | 0.5554 |
+| BiLSTM                            | No                    | Roberta (200D)   | 0.8075   | 0.8039 | 0.6306 |
+| BiLSTM + DenseNet                 | No                    | Glove (200D)     | 0.6228   | 0.6171 | 0.2459 |
+| Encoder-only Transformer + BiLSTM | No                    | Glove (200D)     | 0.8073   | 0.8118 | 0.6145 |
 

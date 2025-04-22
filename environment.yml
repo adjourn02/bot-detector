@@ -13,7 +13,6 @@ dependencies:
   - gensim
   - tqdm
   - matplotlib
-  - seaborn
   - pip
   - pip:
     - torch
