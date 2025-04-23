@@ -25,31 +25,31 @@ Based on “Deep Neural Networks for Bot Detection” paper by Kudugunta et al. 
 Run all the cells in either notebooks (with or without auxiliary output) under "Baseline_Implementation" to get the performance metrics for the Twibot20 dataset.
 
 ## Improved Implementation
-Our team ran the following experiments on the Twibot20 dataset to improve the baseline implementation:
+Our team ran the following modifications to improve the baseline implementation:
 1. BiLSTM without Auxiliary Output and 200D Glove Embeddings
 2. BiLSTM with Auxiliary Output and 200D Glove Embeddings
 3. BiLSTM without Auxiliary Output and 200D Roberta Embeddings
-4. DenseNet and using 200D Roberta Embeddings
+4. DenseNet and using 768D Roberta Embeddings
 5. BiLSTM without Auxiliary Output, DenseNet, and 200D Glove Embeddings
 6. Encoder-only Transformer, BiLSTM without Auxiliary Output, and 200D Glove Embeddings
 
 To run an implementation above, select the respective notebook under "Improved_Implementation" and run all cells just before grid search. The performance of these implementations are tabulated below:
 
-| Implementation                    | With Auxiliary Output | Embedding        | Accuracy | F1     | MCC    |
-|-----------------------------------|-----------------------|------------------|----------|--------|--------|
-| LSTM (baseline)                   | Yes                   | Glove (200D)     | 0.8295   | 0.8403 | 0.6598 |
-| BiLSTM                            | No                    | Glove (200D)     | 0.8235   | 0.8418 | 0.6548 |
-| BiLSTM                            | Yes                   | Glove (200D)     | 0.8180   | 0.8384 | 0.6459 |
-| DenseNet                          | No                    | Roberta (200D)   | 0.7650   | 0.7575 | 0.5554 |
-| BiLSTM                            | No                    | Roberta (200D)   | 0.8075   | 0.8039 | 0.6306 |
-| BiLSTM + DenseNet                 | No                    | Glove (200D)     | 0.8378   | 0.8335 | 0.7034 |
-| Encoder-only Transformer + BiLSTM | No                    | Glove (200D)     | 0.8073   | 0.8118 | 0.6145 |
+| Implementation                    | With Auxiliary Output | Embedding      | Accuracy | F1     | MCC    |
+|-----------------------------------|-----------------------|----------------|----------|--------|--------|
+| LSTM (baseline)                   | Yes                   | Glove (200D)   | 0.8295   | 0.8403 | 0.6598 |
+| BiLSTM                            | No                    | Glove (200D)   | 0.8235   | 0.8418 | 0.6548 |
+| BiLSTM                            | Yes                   | Glove (200D)   | 0.8180   | 0.8384 | 0.6459 |
+| DenseNet                          | No                    | Roberta (768D) | 0.7650   | 0.7575 | 0.5554 |
+| BiLSTM                            | No                    | Roberta (200D) | 0.8075   | 0.8039 | 0.6306 |
+| BiLSTM + DenseNet                 | No                    | Glove (200D)   | 0.8378   | 0.8335 | 0.7034 |
+| Encoder-only Transformer + BiLSTM | No                    | Glove (200D)   | 0.8073   | 0.8118 | 0.6145 |
 
 ## Embedding Visualization
 We used t-SNE to visualize the resulting Embedding when applying either GloVE or RoBERTa, in conjunction with the BiLSTM layer, on the Twibot dataset. The plots are shown below:
 
 <img src="Images/tsne_GloVe Tweet.png" width="450" />
-<img src="Images/tsne_RoBERTa+BiLSTM Tweet.png" width="450" />
+<img src="Images/tsne_RoBERTa Tweet.png" width="450" />
 <img src="Images/tsne_GloVe+BiLSTM Tweet.png" width="450" />
 <img src="Images/tsne_RoBERTa+BiLSTM Tweet.png" width="450" />
 <img src="Images/tsne_GloVe+BiLSTM Tweet+Metadata.png" width="450" />
