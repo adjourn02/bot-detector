@@ -31,7 +31,7 @@ Our team ran the following experiments on the Twibot20 dataset to improve the ba
 3. BiLSTM without Auxiliary Output and 200D Roberta Embeddings
 4. DenseNet and using 200D Roberta Embeddings
 5. BiLSTM without Auxiliary Output, DenseNet, and 200D Glove Embeddings
-6. Transformer, BiLSTM without Auxiliary Output, and 200D Glove Embeddings
+6. Encoder-only Transformer, BiLSTM without Auxiliary Output, and 200D Glove Embeddings
 
 To run an implementation above, select the respective notebook under "Improved_Implementation" and run all cells just before grid search. The performance of these implementations are tabulated below:
 
@@ -48,14 +48,36 @@ To run an implementation above, select the respective notebook under "Improved_I
 ## Embedding Visualization
 We used t-SNE to visualize the resulting Embedding when applying either GloVE or RoBERTa, in conjunction with the BiLSTM layer, on the Twibot dataset. The plots are shown below:
 
-<img src="Images/tsne_glove.png" width="450" />
-<img src="Images/tsne_roberta.png" width="450" />
+<img src="Images/tsne_glove_tweets.png" width="450" />
+<img src="Images/tsne_roberta_tweets.png" width="450" />
 <img src="Images/tsne_glove_lstm_tweet_meta.png" width="450" />
 <img src="Images/tsne_roberta_lstm_tweet_meta.png" width="450" />
 
-From the results above, transforming tweet data to GloVE and RoBERTa embeddings result to different t-SNE outputs. However, when this data is fed to the BiLSTM, then concatenated with the metadata, the resulting t-SNE outputs are similar. This suggests that the metadata is more than likely providing meaningful features compared to tweet data. 
+From the results above, transforming tweet data to GloVE and RoBERTa embeddings result in different t-SNE outputs. However, when this data is fed to the BiLSTM, then concatenated with the metadata, the resulting t-SNE outputs are similar. This suggests that the metadata is more than likely providing meaningful features compared to tweet data. 
 
 ## Bot Detector Using our Best Model on 2024 US Elections Data
+Testing our model on the Elections data, we get the results as follows:
 
+| Month | Predicted Bots | Total Samples | Percentage (%) |
+|-------|----------------|---------------|----------------|
+| Aug   | 149,285        | 150,000       | 99.52%         |
+| Sept  | 148,624        | 150,000       | 99.08%         |
+| Oct   | 148,777        | 150,000       | 99.18%         |
+| Nov   | 148,011        | 150,000       | 98.67%         |
 
- 
+Our model almost always predicts a sample datapoint as a bot which seems obnoxious. Instead, we investigate whether bot activity through the months are reasonable. Below is a plot of normalized predicted bots per month, where the November datapoints are sampled post-election.
+
+<img src="Images/bots_month_chart.png" width="450" />
+
+The values seem reasonable where there is less bot activity post-election. Now, let's see what our classifier is learning by comparing the most frequent words in tweets from both classes for the months of October (pre-election) and November (post-election).
+
+<img src="Images/hist_tweets_oct.png" width="900" />
+<img src="Images/hist_tweets_nov.png" width="900" />
+
+From the results above, both classes have almost the same most frequent words. This implies the following:
+1. Our model does not generalize well to unseen data especially recent ones.
+2. Comparing classes based on the top words frequency alone is insufficient to make conclusions. 
+3. Bots are getting better in imitating human behavior and thus getting better in evading detectors.
+
+## Future Work
+With bots getting better in evading detectors that are trained on tweets and metadata, exploring a bot's network and it's interactions within the network may capture features that are distinguishable from human behavior. In addition, given that there's limited labeled data for bot classification, semi-supervised and unsupervised learning methods may bridge the gap in model learning.
