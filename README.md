@@ -48,12 +48,14 @@ To run an implementation above, select the respective notebook under "Improved_I
 ## Embedding Visualization
 We used t-SNE to visualize the resulting Embedding when applying either GloVE or RoBERTa, in conjunction with the BiLSTM layer, on the Twibot dataset. The plots are shown below:
 
-<img src="Images/tsne_glove_tweets.png" width="450" />
-<img src="Images/tsne_roberta_tweets.png" width="450" />
-<img src="Images/tsne_glove_lstm_tweet_meta.png" width="450" />
-<img src="Images/tsne_roberta_lstm_tweet_meta.png" width="450" />
+<img src="Images/tsne_GloVe Tweet.png" width="450" />
+<img src="Images/tsne_RoBERTa+BiLSTM Tweet.png" width="450" />
+<img src="Images/tsne_GloVe+BiLSTM Tweet.png" width="450" />
+<img src="Images/tsne_RoBERTa+BiLSTM Tweet.png" width="450" />
+<img src="Images/tsne_GloVe+BiLSTM Tweet+Metadata.png" width="450" />
+<img src="Images/tsne_RoBERTa+BiLSTM Tweet+Metadata.png" width="450" />
 
-From the results above, transforming tweet data to GloVE and RoBERTa embeddings result in different t-SNE outputs. However, when this data is fed to the BiLSTM, then concatenated with the metadata, the resulting t-SNE outputs are similar. This suggests that the metadata is more than likely providing meaningful features compared to tweet data. 
+From the results above, transforming tweet data to GloVE and RoBERTa embeddings results to a mix of both classes in a single cluster. Similarly, when this data is fed to the BiLSTM, the results are the same. However, after concatenating the previous data with the metadata, the resulting t-SNE shows separable classes. This suggests that the metadata is more than likely providing meaningful features compared to tweet data. 
 
 ## Bot Detector Using our Best Model on 2024 US Elections Data
 Testing our model on the Elections data, we get the results as follows:
