@@ -1,6 +1,6 @@
 # 2024 US Elections Twitter Data Bot Detector
 
-Detect bots from the 2024 US Elections Twitter data which comprises of tweets and metadata (followers count, friends count, favorites count, listed count, and verified). The data is transformed into embeddings and is fed to our model which classifies whether a tweet, which leverages user metadata, is written by a bot.
+Detect bots from the 2024 US Elections Twitter data which comprises of tweets and metadata (followers count, friends count, favorites count, listed count, and verification status). The data is transformed into embeddings and is fed to our best-performing model which classifies whether a tweet, which leverages user metadata, is written by a bot.
 
 ## Environment Setup
 1. Install anaconda or miniconda.
@@ -14,48 +14,54 @@ The Twibot20 dataset was requested from the main author of "TwiBot-20: A Compreh
 
 The US 2024 Elections dataset can be downloaded on https://github.com/sinking8/usc-x-24-us-election.
 
-Make sure to put these datasets in a folder named 'Data' in the main directory.
+**Make sure to put these datasets in a folder named 'Data' in the main directory.**
 
 ## Generate Embeddings
-Under "Data_Pre_Processing", run all cells in the notebook to generate either Glove or Roberta Embeddings for both tweet data and metadata of Twibot20 or Elections 2024 dataset.
+Under "Data_Pre_Processing", run all cells in the notebook to generate either Glove or Roberta Embeddings for both tweet data and metadata of Twibot20 or 2024 US Elections dataset.
 
 ## Baseline Implementation
-Based on “Deep Neural Networks for Bot Detection” paper by Kudugunta et al. which uses a Contextual LSTM (200D GloVE) model. Our goal is to match the following performance metric scores reported on “TwiBot-20: A Comprehensive Twitter Bot Detection Benchmark” paper by Feng et al. for this model.
+Based on “Deep Neural Networks for Bot Detection” paper by Kudugunta et al. which uses a Contextual LSTM (200D GloVE) model. Our goal is to match the performance metric scores reported on “TwiBot-20: A Comprehensive Twitter Bot Detection Benchmark” paper by Feng et al. for this model.
 
 Run all the cells in either notebooks (with or without auxiliary output) under "Baseline_Implementation" to get the performance metrics for the Twibot20 dataset.
 
 ## Improved Implementation
-Our team ran the following modifications to improve the baseline implementation:
-1. BiLSTM without Auxiliary Output and 200D Glove Embeddings
-2. BiLSTM with Auxiliary Output and 200D Glove Embeddings
-3. BiLSTM without Auxiliary Output and 200D Roberta Embeddings
-4. DenseNet and using 768D Roberta Embeddings
-5. BiLSTM without Auxiliary Output, DenseNet, and 200D Glove Embeddings
-6. Encoder-only Transformer, BiLSTM without Auxiliary Output, and 200D Glove Embeddings
+Our team ran experiments to improve the baseline implementation as shown on the table below. To run a specific approach, select the respective notebook under "Improved_Implementation" and run all cells just before grid search.
 
-To run an implementation above, select the respective notebook under "Improved_Implementation" and run all cells just before grid search. The performance of these implementations are tabulated below:
-
-| Implementation                    | With Auxiliary Output | Embedding      | Accuracy | F1     | MCC    |
-|-----------------------------------|-----------------------|----------------|----------|--------|--------|
-| LSTM (baseline)                   | Yes                   | Glove (200D)   | 0.8295   | 0.8403 | 0.6598 |
-| BiLSTM                            | No                    | Glove (200D)   | 0.8235   | 0.8418 | 0.6548 |
-| BiLSTM                            | Yes                   | Glove (200D)   | 0.8180   | 0.8384 | 0.6459 |
-| DenseNet                          | No                    | Roberta (768D) | 0.7650   | 0.7575 | 0.5554 |
-| BiLSTM                            | No                    | Roberta (200D) | 0.8075   | 0.8039 | 0.6306 |
-| BiLSTM + DenseNet                 | No                    | Glove (200D)   | 0.8378   | 0.8335 | 0.7034 |
-| Encoder-only Transformer + BiLSTM | No                    | Glove (200D)   | 0.8073   | 0.8118 | 0.6145 |
+| Approach                               | Auxiliary Output | Embedding          | ACC    | F1     | MCC    |
+|----------------------------------------|------------------|--------------------|--------|--------|--------|
+| LSTM (baseline)                        | Yes              | Glove              | 0.8295 | 0.8403 | 0.6598 |
+| BiLSTM                                 | No               | Glove              | 0.8235 | 0.8418 | 0.6548 |
+| BiLSTM                                 | Yes              | Glove              | 0.8180 | 0.8384 | 0.6459 |
+| DenseNet                               | No               | Roberta (768D)     | 0.7650 | 0.7575 | 0.5554 |
+| BiLSTM                                 | No               | Roberta (200D)     | 0.8075 | 0.8039 | 0.6306 |
+| BiLSTM + DenseNet                      | No               | Glove              | 0.8378 | 0.8335 | 0.7034 |
+| BiLSTM + DenseNet (Metadata scaled)    | No               | Glove              | **0.8592** | **0.8571** | **0.7328** |
+| BiLSTM + DenseNet                      | No               | RoBERTa (200D)     | 0.8337 | 0.8285 | 0.7007 |
+| BiLSTM + Encoder-only Transformer      | No               | Glove              | 0.8073 | 0.8118 | 0.6145 |
 
 ## Embedding Visualization
-We used t-SNE to visualize the resulting Embedding when applying either GloVE or RoBERTa, in conjunction with the BiLSTM layer, on the Twibot dataset. The plots are shown below:
+We used t-SNE to visualize the resulting Embedding when applying either GloVE or RoBERTa, in conjunction with the BiLSTM layer and concatenating with the metadata, on the Twibot20 dataset. The plots are shown below:
 
-<img src="Images/tsne_GloVe Tweet.png" width="450" />
-<img src="Images/tsne_RoBERTa Tweet.png" width="450" />
-<img src="Images/tsne_GloVe+BiLSTM Tweet.png" width="450" />
-<img src="Images/tsne_RoBERTa+BiLSTM Tweet.png" width="450" />
-<img src="Images/tsne_GloVe+BiLSTM Tweet+Metadata.png" width="450" />
-<img src="Images/tsne_RoBERTa+BiLSTM Tweet+Metadata.png" width="450" />
+<table>
+  <tr>
+    <td><img src="Images/tsne_GloVe Tweet.png" width="450"/></td>
+    <td><img src="Images/tsne_RoBERTa Tweet.png" width="450"/></td>
+  </tr>
+</table>
 
-From the results above, transforming tweet data to GloVE and RoBERTa embeddings results to a mix of both classes in a single cluster. Similarly, when this data is fed to the BiLSTM, the results are the same. However, after concatenating the previous data with the metadata, the resulting t-SNE shows separable classes. This suggests that the metadata is more than likely providing meaningful features compared to tweet data. 
+<table>
+  <tr>
+    <td><img src="Images/tsne_GloVe-BiLSTM Tweet.png" width="450" /></td>
+    <td><img src="Images/tsne_RoBERTa-BiLSTM Tweet.png" width="450" /></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+   <td><img src="Images/tsne_GloVe-BiLSTM Tweet+Metadata.png" width="450" /></td>
+    <td><img src="Images/tsne_RoBERTa-BiLSTM Tweet+Metadata.png" width="450" /></td>
+  </tr>
+</table>
 
 ## Bot Detector Using our Best Model on 2024 US Elections Data
 Testing our model on the Elections data, we get the results as follows:
@@ -71,15 +77,16 @@ Our model almost always predicts a sample datapoint as a bot which seems obnoxio
 
 <img src="Images/bots_month_chart.png" width="450" />
 
-The values seem reasonable where there is less bot activity post-election. Now, let's see what our classifier is learning by comparing the most frequent words in tweets from both classes for the months of October (pre-election) and November (post-election).
+The values seem reasonable where there is less bot activity post-election. Now, let's see what our classifier is learning content-wise by comparing the most frequent words from tweets in both classes for the months of October (pre-election) and November (post-election).
 
 <img src="Images/hist_tweets_oct.png" width="900" />
 <img src="Images/hist_tweets_nov.png" width="900" />
 
-From the results above, both classes have almost the same most frequent words. This implies the following:
-1. Our model does not generalize well to unseen data especially recent ones.
-2. Comparing classes based on the top words frequency alone is insufficient to make conclusions. 
-3. Bots are getting better in imitating human behavior and thus getting better in evading detectors.
+## Conclusion
+The results from the 2024 U.S. Elections dataset indicate that nearly 99% of the tweets were generated by bots. Additionally, data exploration reveals that both bot and human accounts share many of the same most frequent words. These findings suggest several important implications. First, the model appears to have limited ability to generalize to unseen data, particularly to more recent examples. Second, the similarity in word frequency between the two classes indicates that tweet content alone is insufficient for reliably distinguishing between bots and humans; metadata plays a critical role in enhancing classification performance. Finally, the increasing linguistic sophistication of bots underscores their growing capacity to mimic human behavior, thereby making them more challenging to detect using traditional content-based methods.
+
+## Challenges
+The scarcity of labeled data for bot classification presents a significant challenge in fully leveraging the capacity of deep neural networks. Moreover, as bots continue to evolve and become increasingly adept at evading detection systems, the lack of up-to-date labeled datasets further hinders the ability to capture and model emerging patterns of bot behavior.
 
 ## Future Work
-With bots getting better in evading detectors that are trained on tweets and metadata, exploring a bot's network and it's interactions within the network may capture features that are distinguishable from human behavior. In addition, given that there's limited labeled data for bot classification, semi-supervised and unsupervised learning methods may bridge the gap in model learning.
+As bots continue to evolve and evade detection systems trained solely on tweet content and metadata, future research may benefit from incorporating features derived from network structure and user interactions. Analyzing a bot’s position and behavior within social graphs could reveal patterns that are more robust and discriminative than content-based features alone. Additionally, given the limited availability of labeled data for bot classification, semi-supervised and unsupervised learning approaches present promising directions. These methods can leverage large volumes of unlabeled data to enhance model generalization and improve robustness against evolving bot behaviors.
