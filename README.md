@@ -85,3 +85,5 @@ The values seem reasonable where there is less bot activity post-election. Now, 
 
 <img src="Images/hist_tweets_Oct.png" width="900" />
 <img src="Images/hist_tweets_Nov.png" width="900" />
+
+The similarity in word frequency between the two classes indicates that tweet content alone is insufficient for reliably distinguishing between bots and humans; metadata plays a critical role in enhancing classification performance.
