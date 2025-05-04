@@ -2,6 +2,9 @@
 
 Detect bots from the 2024 US Elections Twitter data which comprises of tweets and metadata (followers count, friends count, favorites count, listed count, and verification status). The data is transformed into embeddings and is fed to our best-performing model which classifies whether a tweet, which leverages user metadata, is written by a bot.
 
+## Paper
+Our project paper can be found on https://drive.google.com/file/d/1rDiU8aDaY4uyTF26wNXlgT7AuzsTER8Y/view?usp=sharing.
+
 ## Environment Setup
 1. Install anaconda or miniconda.
 2. Run `conda env create -f environment.yml`
